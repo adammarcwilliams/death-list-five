@@ -1,0 +1,10 @@
+.Header {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.Header__heading {
+  font-size: 1.75rem;
+  padding-top: 20px;
+}

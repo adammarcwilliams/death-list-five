@@ -1,0 +1,37 @@
+/* font setup */
+@font-face {
+  font-family: 'Trash Hand';
+  src: url('./assets/fonts/TrashHand.TTF') format('truetype');
+}
+
+/* standard setup */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+
+  font-family: 'Trash Hand';
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+
+  color: #2F2F2F;
+  
+  user-select: none;
+
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+box-sizing: inherit;
+}
+
+a {
+  outline: none;
+}
+
+#root {
+position: relative;
+width: 100%;
+height: 100%;
+}
