@@ -6,5 +6,7 @@
 
 .Header__heading {
   font-size: 1.75rem;
-  padding-top: 20px;
+  padding-top: 1.25rem;
+  padding-bottom: 0.5rem;
+  background: no-repeat bottom/contain url('../../assets/svg/underline.svg');
 }
