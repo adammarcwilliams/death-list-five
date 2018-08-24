@@ -22,3 +22,12 @@
   font-size: 1.5rem;
   color: #DA312E;
 }
+
+.Target__strike {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 75%;
+  background: no-repeat center/auto url('../../assets/svg/strike_right.svg');
+  pointer-events: none;
+}

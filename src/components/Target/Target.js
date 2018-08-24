@@ -11,7 +11,8 @@ export default class Target extends Component {
       eliminated: PropTypes.bool.isRequired
     }).isRequired,
     position: PropTypes.number.isRequired,
-    updateTarget: PropTypes.func.isRequired
+    updateTarget: PropTypes.func.isRequired,
+    toggleTarget: PropTypes.func.isRequired
   }
 
   handleUpdate = e => {
@@ -21,13 +22,21 @@ export default class Target extends Component {
     this.props.updateTarget(id, text)
   }
 
+  handleToggle = e => {
+    const id = this.props.target.id
+
+    this.props.toggleTarget(id)
+  }
+
   render () {
     const { target, position } = this.props
     const { description, eliminated } = target
 
     return (
       <div className='Target'>
-        <div className='Target__position'>{position}.</div>
+        <div className='Target__position' onClick={this.handleToggle}>
+          {position}.
+        </div>
         <div
           className='Target__description'
           onBlur={this.handleUpdate}
@@ -36,6 +45,7 @@ export default class Target extends Component {
         >
           {description}
         </div>
+        {eliminated && <div className='Target__strike' />}
       </div>
     )
   }

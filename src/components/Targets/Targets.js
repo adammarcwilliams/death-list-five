@@ -13,11 +13,12 @@ export default class Targets extends Component {
         eliminated: PropTypes.bool.isRequired
       })
     ).isRequired,
-    updateTarget: PropTypes.func.isRequired
+    updateTarget: PropTypes.func.isRequired,
+    toggleTarget: PropTypes.func.isRequired
   }
 
   render () {
-    const { targets, updateTarget } = this.props
+    const { targets, updateTarget, toggleTarget } = this.props
     return (
       <div className='Targets'>
         {targets.map((target, index) => (
@@ -26,6 +27,7 @@ export default class Targets extends Component {
             position={index + 1}
             target={target}
             updateTarget={updateTarget}
+            toggleTarget={toggleTarget}
           />
         ))}
       </div>
