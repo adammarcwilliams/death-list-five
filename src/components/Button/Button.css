@@ -1,0 +1,16 @@
+.Button {
+  position: relative;
+  display: block;
+  font-size: 1.25rem;
+  padding: 1rem;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: auto;
+  background-image: url('../../assets/svg/button_left.svg');
+  cursor: pointer;
+}
+
+.Button--right {
+  background-image: url('../../assets/svg/button_right.svg');
+  color: white;
+}

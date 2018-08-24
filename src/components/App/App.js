@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Header from '../Header/Header'
 import Targets from '../Targets/Targets'
+import Button from '../Button/Button'
 
 import './App.css'
 
@@ -40,6 +41,10 @@ class App extends Component {
       <div className='App'>
         <Header />
         <Targets targets={this.state.targets} />
+        <div className='App__buttons'>
+          <Button text='Add new target' handleClick={() => {}} />
+          <Button text='Bury the dead' handleClick={() => {}} right />
+        </div>
       </div>
     )
   }
