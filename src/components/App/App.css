@@ -5,16 +5,24 @@
   align-items: center;
 }
 
-.App__buttons {
+.App__footer {
   position: fixed;
-  bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+}
+
+.App__buttons {
+  position: relative;
   display: flex;
   justify-content: space-around;
   align-items: center;
   width: 100%;
   max-width: 350px;
-  left: 50%;
-  transform: translate(-50%)
 }
 
 .App__flash {

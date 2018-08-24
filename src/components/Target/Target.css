@@ -1,9 +1,12 @@
 .Target {
   position: relative;
   display: flex;
-  align-items: center;
   padding-bottom: 2rem;
   width: 100%;
+}
+
+.Target:last-of-type {
+  padding-bottom: 5rem;
 }
 
 .Target__position {
@@ -19,7 +22,7 @@
 }
 
 .Target__description {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   color: #DA312E;
 }
 

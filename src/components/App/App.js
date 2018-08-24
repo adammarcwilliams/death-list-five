@@ -59,14 +59,16 @@ class App extends Component {
           updateTarget={this.updateTarget}
           toggleTarget={this.toggleTarget}
         />
-        {this.state.flashMessage &&
-          <div className='App__flash'>
-            {this.state.flashMessage}
-          </div>}
-        <div className='App__buttons'>
-          <Button text='Add new target' handleClick={this.addTarget} />
-          <Button text='Bury the dead' handleClick={() => {}} right />
-        </div>
+        <footer className='App__footer'>
+          {this.state.flashMessage &&
+            <div className='App__flash'>
+              {this.state.flashMessage}
+            </div>}
+          <div className='App__buttons'>
+            <Button text='Add new target' handleClick={this.addTarget} />
+            <Button text='Bury the dead' handleClick={() => {}} right />
+          </div>
+        </footer>
       </div>
     )
   }
