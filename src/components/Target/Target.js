@@ -20,7 +20,7 @@ export default class Target extends Component {
     return (
       <div className='Target'>
         <div className='Target__position'>{position}.</div>
-        <div className='Target__description'>{description}</div>
+        <div className='Target__description' contentEditable>{description}</div>
       </div>
     )
   }
