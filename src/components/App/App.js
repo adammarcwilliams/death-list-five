@@ -31,7 +31,7 @@ class App extends Component {
   }
 
   updateTarget = (id, text) => {
-    /* Find targed in the array and update it's description */
+    /* Find target in the targets array and update it's description */
     const targetIndex = this.state.targets.findIndex(target => target.id === id)
     const targets = [...this.state.targets]
 
@@ -41,13 +41,21 @@ class App extends Component {
   }
 
   toggleTarget = id => {
-    /* Find targed in the array and toggles whether it's been eliminated or not */
+    /* Find target in the targets array and toggles whether it's been eliminated or not */
     const targetIndex = this.state.targets.findIndex(target => target.id === id)
     const targets = [...this.state.targets]
 
     targets[targetIndex].eliminated = !targets[targetIndex].eliminated
 
     this.setState(state => ({ targets }))
+  }
+
+  removeEliminatedTargets = () => {
+    /* Find targets in the targets array that have been eliminated and remove them */
+    const targets = [...this.state.targets]
+    const activeTargets = targets.filter(target => !target.eliminated)
+
+    this.setState(state => ({ targets: activeTargets }))
   }
 
   render () {
@@ -66,7 +74,11 @@ class App extends Component {
             </div>}
           <div className='App__buttons'>
             <Button text='Add new target' handleClick={this.addTarget} />
-            <Button text='Bury the dead' handleClick={() => {}} right />
+            <Button
+              text='Bury the dead'
+              handleClick={this.removeEliminatedTargets}
+              right
+            />
           </div>
         </footer>
       </div>
