@@ -8,19 +8,25 @@ export default class Targets extends Component {
   static propTypes = {
     targets: PropTypes.arrayOf(
       PropTypes.shape({
-        id: PropTypes.number.isRequired,
+        id: PropTypes.string.isRequired,
         description: PropTypes.string.isRequired,
         eliminated: PropTypes.bool.isRequired
       })
-    ).isRequired
+    ).isRequired,
+    updateTarget: PropTypes.func.isRequired
   }
 
   render () {
-    const { targets } = this.props
+    const { targets, updateTarget } = this.props
     return (
       <div className='Targets'>
         {targets.map((target, index) => (
-          <Target key={target.id} position={index + 1} target={target} />
+          <Target
+            key={target.id}
+            position={index + 1}
+            target={target}
+            updateTarget={updateTarget}
+          />
         ))}
       </div>
     )

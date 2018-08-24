@@ -7,42 +7,52 @@ import './App.css'
 
 class App extends Component {
   state = {
-    targets: [
-      {
-        id: 1,
-        description: 'Design a to-do list That can wrap across two orthree lines... ',
-        eliminated: false
-      },
-      {
-        id: 2,
-        description: 'Design a to-do list That can wrap across two orthree lines... ',
-        eliminated: false
-      },
-      {
-        id: 3,
-        description: 'Design a to-do list That can wrap across two orthree lines... ',
-        eliminated: false
-      },
-      {
-        id: 4,
-        description: 'Design a to-do list That can wrap across two orthree lines... ',
-        eliminated: false
-      },
-      {
-        id: 5,
-        description: 'Design a to-do list That can wrap across two orthree lines... ',
+    targets: [],
+    flashMessage: null
+  }
+
+  addTarget = () => {
+    // add new target to list if less than five
+    if (this.state.targets.length < 5) {
+      const newTarget = {
+        id: Date.now().toString(),
+        description: 'Click here and replace me with your next target!',
         eliminated: false
       }
-    ]
+      this.setState(state => ({ targets: [...state.targets, newTarget] }))
+    } else {
+      const flashMessage =
+        'Slow down killer! This is Death List Five!! Settle some scores and come back!'
+      this.setState(state => ({ flashMessage }))
+      setTimeout(() => {
+        this.setState(state => ({ flashMessage: null }))
+      }, 4000)
+    }
+  }
+
+  updateTarget = (id, text) => {
+    const targetIndex = this.state.targets.findIndex(target => target.id === id)
+    const targets = [...this.state.targets]
+
+    targets[targetIndex].description = text
+
+    this.setState(state => ({ targets }))
   }
 
   render () {
     return (
       <div className='App'>
         <Header />
-        <Targets targets={this.state.targets} />
+        <Targets
+          targets={this.state.targets}
+          updateTarget={this.updateTarget}
+        />
+        {this.state.flashMessage &&
+          <div className='App__flash'>
+            {this.state.flashMessage}
+          </div>}
         <div className='App__buttons'>
-          <Button text='Add new target' handleClick={() => {}} />
+          <Button text='Add new target' handleClick={this.addTarget} />
           <Button text='Bury the dead' handleClick={() => {}} right />
         </div>
       </div>

@@ -6,10 +6,21 @@
 }
 
 .App__buttons {
-  position: relative;
+  position: fixed;
+  bottom: 2rem;
   display: flex;
   justify-content: space-around;
   align-items: center;
   width: 100%;
   max-width: 350px;
+  left: 50%;
+  transform: translate(-50%)
+}
+
+.App__flash {
+  position: relative;
+  display: block;
+  font-size: 1.5rem;
+  padding: 1rem;
+  text-align: center;
 }
