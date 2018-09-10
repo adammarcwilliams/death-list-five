@@ -4,11 +4,31 @@ import Targets from '../Targets/Targets'
 import Button from '../Button/Button'
 
 import './App.css'
+import { db } from '../..';
 
 class App extends Component {
   state = {
     targets: [],
     flashMessage: null
+  }
+
+  componentDidMount () {
+    this.getTargets();
+  }
+
+  getTargets = () => {
+    db.collection("targets").get().then((querySnapshot) => {
+      console.log('querySnapshot', querySnapshot);
+      
+      const targets = [];
+
+      querySnapshot.forEach((doc) => {
+          console.log(`${doc.id} => `, doc.data());
+          targets.push(doc.data())
+      });
+
+      this.setState(state => ({ targets }))
+    });
   }
 
   addTarget = () => {
@@ -19,6 +39,7 @@ class App extends Component {
         description: 'Click here and replace me with your next target! Then tap my number or swipe to eliminate me!',
         eliminated: false
       }
+      db.collection('targets').add(newTarget);
       this.setState(state => ({ targets: [...state.targets, newTarget] }))
     } else {
       const flashMessage =
