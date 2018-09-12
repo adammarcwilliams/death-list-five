@@ -6,6 +6,10 @@ import { db } from '../..'
 |--------------------------------------------------------------------------
 */
 
+export const addTarget = (target) => {
+  type: 'ADD_TARGET',
+  target
+}
 
 
 /*
@@ -21,7 +25,7 @@ export const addTargetAsync = (target) => {
       // do async target and handle Redux offline stuff??
     } catch (error) {
       console.error(error);
-      dispatch(flashMessage(error))
+      // dispatch(flashMessage(error))
     }
   };
 };
