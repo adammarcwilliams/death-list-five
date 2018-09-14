@@ -4,7 +4,6 @@ import Targets from '../Targets/Targets'
 import Button from '../Button/Button'
 
 import './App.css'
-import { db } from '../..';
 
 class App extends Component {
   state = {
@@ -13,23 +12,22 @@ class App extends Component {
   }
 
   componentDidMount () {
-    this.getTargets();
+    /* Subscribe to firestore updates */
+    this.props.firestore
+      .collection('targets')
+      .onSnapshot(this.setTargets)
   }
 
-  getTargets = () => {
-    // db.collection("targets").get().then((querySnapshot) => {
-    //   console.log('querySnapshot', querySnapshot);
-      
-    //   const targets = [];
-
-    //   querySnapshot.forEach((doc) => {
-    //       console.log(`${doc.id} => `, doc.data());
-    //       targets.push(doc.data())
-    //   });
-
-    //   this.setState(state => ({ targets }))
-    // });
+  setTargets = (querySnapshot) => {
+    const targets = []
+    
+    querySnapshot.forEach(doc => {
+      targets.push(doc.data())
+    })
+    
+    this.setState(state => ({ targets }))
   }
+
 
   addTarget = () => {
     /* Add a default editable target to the end of the list if less than five exist */
