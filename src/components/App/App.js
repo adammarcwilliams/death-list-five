@@ -31,32 +31,28 @@ class App extends Component {
 
   addTarget = () => {
     /* Add a default editable target to the end of the list if less than five exist */
-    // if (this.state.targets.length < 5) {
-    //   const newTarget = {
-    //     id: Date.now().toString(),
-    //     description: 'Click here and replace me with your next target! Then tap my number or swipe to eliminate me!',
-    //     eliminated: false
-    //   }
-    //   db.collection('targets').add(newTarget);
-    //   this.setState(state => ({ targets: [...state.targets, newTarget] }))
-    // } else {
-    //   const flashMessage =
-    //     'Slow down killer! This is Death List Five!! Settle some scores and come back!'
-    //   this.setState(state => ({ flashMessage }))
-    //   setTimeout(() => {
-    //     this.setState(state => ({ flashMessage: null }))
-    //   }, 4000)
-    // }
+    if (this.state.targets.length < 5) {
+      const newTarget = {
+        id: Date.now().toString(),
+        description: 'Click here and replace me with your next target! Then tap my number or swipe to eliminate me!',
+        eliminated: false
+      }
+      this.props.firestore.collection('targets').add(newTarget);
+    } else {
+      const flashMessage =
+        'Slow down killer! This is Death List Five!! Settle some scores and come back!'
+      this.setState(state => ({ flashMessage }))
+      setTimeout(() => {
+        this.setState(state => ({ flashMessage: null }))
+      }, 4000)
+    }
   }
 
-  updateTarget = (id, text) => {
-    /* Find target in the targets array and update it's description */
-    // const targetIndex = this.state.targets.findIndex(target => target.id === id)
-    // const targets = [...this.state.targets]
-
-    // targets[targetIndex].description = text
-
-    // this.setState(state => ({ targets }))
+  updateTarget = (id, description) => {
+    // console.log('id', id);
+    // /* Find target in the firestore and update it's description */
+    // this.props.firestore.collection('targets').doc('6GaDsK5SxcqKpMSb2LON').update({ description });
+    
   }
 
   toggleTarget = id => {
