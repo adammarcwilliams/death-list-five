@@ -4,14 +4,11 @@ import App from './components/App/App'
 // import registerServiceWorker from './registerServiceWorker';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
+import firebaseConfig from './firebaseConfig';
 
 import './index.css'
 
-firebase.initializeApp({
-  apiKey: 'AIzaSyB5nnWrwULhlKSf-rKwA6oQflKmk-T4KEc',
-  authDomain: 'death-list-five.firebaseapp.com',
-  projectId: 'death-list-five',
-});
+firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
 
