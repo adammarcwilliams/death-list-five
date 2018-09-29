@@ -6,7 +6,7 @@ import './Target.css'
 export default class Target extends Component {
   static propTypes = {
     target: PropTypes.shape({
-      id: PropTypes.string.isRequired,
+      uuid: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
       eliminated: PropTypes.bool.isRequired
     }).isRequired,
@@ -17,15 +17,15 @@ export default class Target extends Component {
 
   handleUpdate = e => {
     const text = e.target.innerText
-    const id = this.props.target.id
+    const uuid = this.props.target.uuid
 
-    this.props.updateTarget(id, text)
+    this.props.updateTarget(uuid, text)
   }
 
   handleToggle = e => {
-    const id = this.props.target.id
+    const uuid = this.props.target.uuid
 
-    this.props.toggleTarget(id)
+    this.props.toggleTarget(uuid)
   }
 
   render () {

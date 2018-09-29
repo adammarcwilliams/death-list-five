@@ -13,31 +13,28 @@ class App extends Component {
 
   componentDidMount () {
     /* Subscribe to firestore updates */
-    this.props.firestore
-      .collection('targets')
-      .onSnapshot(this.setTargets)
+    this.props.firestore.collection('targets').onSnapshot(this.setTargets)
   }
 
-  setTargets = (querySnapshot) => {
+  setTargets = querySnapshot => {
     const targets = []
-    
+
     querySnapshot.forEach(doc => {
       targets.push(doc.data())
     })
-    
+
     this.setState(state => ({ targets }))
   }
-
 
   addTarget = () => {
     /* Add a default editable target to the end of the list if less than five exist */
     if (this.state.targets.length < 5) {
       const newTarget = {
-        id: Date.now().toString(),
+        uuid: Date.now().toString(),
         description: 'Click here and replace me with your next target! Then tap my number or swipe to eliminate me!',
         eliminated: false
       }
-      this.props.firestore.collection('targets').add(newTarget);
+      this.props.firestore.collection('targets').add(newTarget)
     } else {
       const flashMessage =
         'Slow down killer! This is Death List Five!! Settle some scores and come back!'
@@ -48,20 +45,34 @@ class App extends Component {
     }
   }
 
-  updateTarget = (id, description) => {
-    // console.log('id', id);
-    // /* Find target in the firestore and update it's description */
-    // this.props.firestore.collection('targets').doc('6GaDsK5SxcqKpMSb2LON').update({ description });
-    
+  updateTarget = async (targetId, description) => {
+    /* Find target in the firestore and update it's description */
+    const { firestore } = this.props
+
+    try {
+      /* retrieve the targets docId so we can update it */
+      const querySnapshot = await firestore
+        .collection('targets')
+        .where('uuid', '==', targetId)
+        .get()
+
+      let docId
+
+      if (querySnapshot.docs[0]) {
+        docId = querySnapshot.docs[0].id
+
+        firestore.collection('targets').doc(docId).update({ description })
+      }
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   toggleTarget = id => {
     /* Find target in the targets array and toggles whether it's been eliminated or not */
     // const targetIndex = this.state.targets.findIndex(target => target.id === id)
     // const targets = [...this.state.targets]
-
     // targets[targetIndex].eliminated = !targets[targetIndex].eliminated
-
     // this.setState(state => ({ targets }))
   }
 
@@ -69,7 +80,6 @@ class App extends Component {
     /* Find targets in the targets array that have been eliminated and remove them */
     // const targets = [...this.state.targets]
     // const activeTargets = targets.filter(target => !target.eliminated)
-
     // this.setState(state => ({ targets: activeTargets }))
   }
 

@@ -8,7 +8,7 @@ export default class Targets extends Component {
   static propTypes = {
     targets: PropTypes.arrayOf(
       PropTypes.shape({
-        id: PropTypes.string.isRequired,
+        uuid: PropTypes.string.isRequired,
         description: PropTypes.string.isRequired,
         eliminated: PropTypes.bool.isRequired
       })
@@ -23,7 +23,7 @@ export default class Targets extends Component {
       <div className='Targets'>
         {targets.map((target, index) => (
           <Target
-            key={target.id}
+            key={target.uuid}
             position={index + 1}
             target={target}
             updateTarget={updateTarget}
