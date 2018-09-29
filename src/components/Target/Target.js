@@ -37,14 +37,13 @@ export default class Target extends Component {
           {position}.
         </div>
         <div
-          className='Target__description'
+          className={`Target__description ${eliminated ? 'Target__description--eliminated' : ''}`}
           onBlur={this.handleUpdate}
           contentEditable={eliminated === false}
           suppressContentEditableWarning
         >
           {description}
         </div>
-        {eliminated && <div className='Target__strike' />}
       </div>
     )
   }
