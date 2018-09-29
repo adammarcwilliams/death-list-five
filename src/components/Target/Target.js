@@ -39,7 +39,7 @@ export default class Target extends Component {
         <div
           className='Target__description'
           onBlur={this.handleUpdate}
-          contentEditable
+          contentEditable={!eliminated}
           suppressContentEditableWarning
         >
           {description}
