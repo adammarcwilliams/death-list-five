@@ -17,15 +17,13 @@ export default class Target extends Component {
 
   handleUpdate = e => {
     const text = e.target.innerText
-    const uuid = this.props.target.uuid
-
-    this.props.updateTarget(uuid, text)
+    const id = this.props.target.uuid
+    this.props.updateTarget(id, text)
   }
 
   handleToggle = e => {
-    const uuid = this.props.target.uuid
-
-    this.props.toggleTarget(uuid)
+    const { id, eliminated } = this.props.target
+    this.props.toggleTarget(id, eliminated)
   }
 
   render () {

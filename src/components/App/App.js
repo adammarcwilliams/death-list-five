@@ -68,12 +68,30 @@ class App extends Component {
     }
   }
 
-  toggleTarget = id => {
+  toggleTarget = async (targetId, eliminated) => {
     /* Find target in the targets array and toggles whether it's been eliminated or not */
-    // const targetIndex = this.state.targets.findIndex(target => target.id === id)
-    // const targets = [...this.state.targets]
-    // targets[targetIndex].eliminated = !targets[targetIndex].eliminated
-    // this.setState(state => ({ targets }))
+    const { firestore } = this.props
+
+    try {
+      /* retrieve the targets docId so we can update it */
+      const querySnapshot = await firestore
+        .collection('targets')
+        .where('uuid', '==', targetId)
+        .get()
+
+      let docId
+
+      if (querySnapshot.docs[0]) {
+        docId = querySnapshot.docs[0].id
+
+        firestore
+          .collection('targets')
+          .doc(docId)
+          .update({ eliminated: !eliminated })
+      }
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   removeEliminatedTargets = () => {
