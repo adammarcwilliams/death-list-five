@@ -94,11 +94,39 @@ class App extends Component {
     }
   }
 
-  removeEliminatedTargets = () => {
+  removeEliminatedTargets = async () => {
     /* Find targets in the targets array that have been eliminated and remove them */
-    // const targets = [...this.state.targets]
-    // const activeTargets = targets.filter(target => !target.eliminated)
-    // this.setState(state => ({ targets: activeTargets }))
+    const { firestore } = this.props
+    console.log('HERE')
+    try {
+      /* retrieve the targets docId so we can update it */
+      const querySnapshot = await firestore
+        .collection('targets')
+        .where('eliminated', '==', true)
+        .get()
+      console.log(querySnapshot)
+
+      querySnapshot.forEach(doc => {
+        console.log(doc)
+        firestore
+          .collection('targets')
+          .doc(doc.id)
+          .delete()
+          .catch(err => console.error(err))
+      })
+
+      // let docId
+
+      // if (querySnapshot.docs[0]) {
+      //   docId = querySnapshot.docs[0].id
+
+      //   firestore
+      //     .collection('targets')
+      //     .doc(docId)
+      //     .update({ eliminated: !eliminated })
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   render () {
